@@ -12,7 +12,7 @@ namespace csharp_ie
 
             public Filter()
             {
-                _pattern = new Regex("c?ei");
+                _pattern = new Regex("c?ei", RegexOptions.Compiled);
             }
 
             public bool IsValid(string s)
