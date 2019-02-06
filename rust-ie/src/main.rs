@@ -26,9 +26,10 @@ fn main() -> io::Result<()> {
     let handle = io::stdout();
     let filter = Filter::new();
 
+    let mut buf = String::new();
     let mut writer = handle.lock();
 
-    for word in word_list() {
+    for word in word_list(&mut buf)? {
         if !filter.is_valid(word) {
             writeln!(writer, "{}", word)?;
         }
@@ -37,7 +38,13 @@ fn main() -> io::Result<()> {
     Ok(())
 }
 
-fn word_list() -> impl Iterator<Item = &'static str> {
-    static ENABLE1: &str = include_str!("../../resource/enable1.txt");
-    ENABLE1.split_ascii_whitespace()
+fn word_list(buf: &mut String) -> io::Result<impl Iterator<Item = &str>> {
+    use std::env;
+    use std::fs::File;
+    use std::io::Read;
+
+    let _ = File::open(env::args().nth(1).expect("Provide filename"))
+        .and_then(|mut f| f.read_to_string(buf))?;
+
+    Ok(buf.split_ascii_whitespace())
 }
