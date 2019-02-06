@@ -17,14 +17,15 @@ function process_file(data, err) {
     // ...because that's a thing you need for node.
     let lines = content.split(/\r?\n/);
     lines.forEach(item => {
-        if (!is_valid(item)) {
+        // Apparently this method is too stupid to skip empty lines...
+        if (item.length > 0 && !is_valid(item)) {
             console.log(item);
         }
     });
 }
 
 function is_valid(s) {
-    let captures = pattern.exec(s);
+    let captures = s.match(pattern);
     if (!captures) {
         return true;
     }
