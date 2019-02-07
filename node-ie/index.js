@@ -1,5 +1,5 @@
 var fs = require('fs');
-var pattern = /c?ei/g;
+var pattern = /([^c]|^)ei/;
 
 let path = process.argv[2];
 fs.readFile(path, "utf8", (err, data) => process_file(data, err));
@@ -25,17 +25,5 @@ function process_file(data, err) {
 }
 
 function is_valid(s) {
-    let captures = s.match(pattern);
-    if (!captures) {
-        return true;
-    }
-
-    for (let i = 0; i < captures.length; ++i) {
-        let capture = captures[i];
-
-        if (!capture.startsWith('c')) {
-            return false;
-        }
-    }
-    return true;
+    return !s.match(pattern)
 }

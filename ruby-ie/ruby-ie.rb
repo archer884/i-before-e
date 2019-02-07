@@ -1,12 +1,7 @@
-$pattern = /c?ei/
+$pattern = /([^c]|^)ei/
 
 def is_valid(s)
-    for capture in s.scan($pattern)
-        if !capture.start_with?('c')
-            return false
-        end
-    end
-    return true
+    !($pattern === s)
 end
 
 path = ARGV[0]

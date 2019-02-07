@@ -6,7 +6,6 @@ import (
 	"log"
 	"os"
 	"regexp"
-	"strings"
 )
 
 func main() {
@@ -19,7 +18,7 @@ func main() {
 	defer file.Close()
 
 	scanner := bufio.NewScanner(file)
-	pattern := regexp.MustCompile(`c?ei`)
+	pattern := regexp.MustCompile(`([^c]|^)ei`)
 
 	for scanner.Scan() {
 		if !isValid(scanner.Text(), pattern) {
@@ -29,12 +28,5 @@ func main() {
 }
 
 func isValid(s string, pattern *regexp.Regexp) bool {
-	captures := pattern.FindAllString(s, -1)
-
-	for _, capture := range captures {
-		if !strings.HasPrefix(capture, "c") {
-			return false
-		}
-	}
-	return true
+	return !pattern.MatchString(s)
 }

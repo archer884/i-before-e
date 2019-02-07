@@ -8,17 +8,12 @@ struct Filter {
 impl Filter {
     fn new() -> Self {
         Self {
-            pattern: Regex::new("c?ei").unwrap(),
+            pattern: Regex::new("([^c]|^)ei").unwrap(),
         }
     }
 
     fn is_valid(&self, s: &str) -> bool {
-        for groups in self.pattern.captures_iter(s) {
-            if !groups.get(0).unwrap().as_str().starts_with('c') {
-                return false;
-            }
-        }
-        true
+        !self.pattern.is_match(s)
     }
 }
 
