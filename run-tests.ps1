@@ -17,4 +17,9 @@ function Measure-Runtime
     Pop-Location
 }
 
+Measure-Runtime Csharp .\csharp-ie
+Measure-Runtime Go .\go-ie
+Measure-Runtime Node .\node-ie
+Measure-Runtime Python .\python-ie
+Measure-Runtime Ruby .\ruby-ie
 Measure-Runtime Rust .\rust-ie
