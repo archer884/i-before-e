@@ -1,3 +1,11 @@
+# Look, there are some neat things about this program, BUT...
+#
+# ...It's slower than Christmas, and I figured it would be, and I'm not even 
+# all that good at writing PowerShell. I thought it was only fair to include
+# it because I used PowerShell for all the glue that runs the other tests.
+#
+# Come on, everyone gets a turn at bat.
+
 param (
     [Parameter(Mandatory=$true, Position=0)]
     [string]
