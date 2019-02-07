@@ -5,6 +5,11 @@
 # it because I used PowerShell for all the glue that runs the other tests.
 #
 # Come on, everyone gets a turn at bat.
+#
+# Besides, the following script would just be too simple:
+# Select-String .\resource\enable1.txt -Pattern '(?<!c)ei'
+#
+# ...The above script executes in about the same time as the Rust version.
 
 param (
     [Parameter(Mandatory=$true, Position=0)]
