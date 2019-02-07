@@ -12,19 +12,12 @@ namespace csharp_ie
 
             public Filter()
             {
-                _pattern = new Regex("c?ei", RegexOptions.Compiled);
+                _pattern = new Regex("(?<!c)ei", RegexOptions.Compiled);
             }
 
             public bool IsValid(string s)
             {
-                foreach (Match capture in _pattern.Matches(s))
-                {
-                    if (!capture.Value.StartsWith('c'))
-                    {
-                        return false;
-                    }
-                }
-                return true;
+                return !_pattern.IsMatch(s);
             }
         }
 
