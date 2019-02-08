@@ -1,8 +1,11 @@
 import std.stdio, std.regex;
 
+/// Filter used to reject words not complying with the I-before-E rule.
 class Filter {
+	/// Regex pattern used to detect noncompliance.
 	static Regex!char pattern = regex("([^c]|^)ei");
 
+	/// Returns true if a word is compliant, else false.
 	bool isValid(char[] s) {
 		return matchFirst(s, pattern).length() == 0;
 	}
