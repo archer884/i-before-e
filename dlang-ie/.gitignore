@@ -1,0 +1,15 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/dlang-ie
+dlang-ie.so
+dlang-ie.dylib
+dlang-ie.dll
+dlang-ie.a
+dlang-ie.lib
+dlang-ie-test-*
+*.exe
+*.o
+*.obj
+*.lst
