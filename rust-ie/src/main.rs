@@ -2,18 +2,29 @@ use regex::Regex;
 use std::io::{self, Write};
 
 struct Filter {
-    pattern: Regex,
+    // pattern: Regex,
 }
 
 impl Filter {
     fn new() -> Self {
         Self {
-            pattern: Regex::new("([^c]|^)ei").unwrap(),
+            // pattern: Regex::new("([^c]|^)ei").unwrap(),
         }
     }
 
     fn is_valid(&self, s: &str) -> bool {
-        !self.pattern.is_match(s)
+        let mut is_safe = false;
+        
+        for pair in s.as_bytes().windows(2) {
+            match pair {
+                [b'c', b'e'] => is_safe = true,
+                [b'e', b'i'] if !is_safe => return false,
+
+                _ => is_safe = false,
+            }
+        }
+
+        true
     }
 }
 
